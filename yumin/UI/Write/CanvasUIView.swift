@@ -31,8 +31,33 @@ class CanvasUIView: PKCanvasView {
     }
     
     func saveImageToPhotoLibrary() {
-        let image = exportAsImage()
+        let image = exportAsImageWithWhiteBackgroundAndBlackDrawing()
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+    }
+
+    func exportAsImageWithWhiteBackgroundAndBlackDrawing() -> UIImage {
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = UIScreen.main.scale
+        let renderer = UIGraphicsImageRenderer(size: bounds.size, format: format)
+
+        return renderer.image { context in
+            // 흰 배경
+            UIColor.white.setFill()
+            context.fill(bounds)
+
+            // 검정 드로잉 적용 (이미지로 변환하여 그리기)
+            let blackDrawing = PKDrawing(strokes: drawing.strokes.map { stroke in
+                PKStroke(
+                    ink: PKInk(.pen, color: .black),
+                    path: stroke.path,
+                    transform: stroke.transform,
+                    mask: stroke.mask
+                )
+            })
+
+            let drawingImage = blackDrawing.image(from: bounds, scale: UIScreen.main.scale)
+            drawingImage.draw(in: bounds)
+        }
     }
 
     func exportAsImage() -> UIImage {

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct TotalView: View {
     @State private var selectedIndex: Int = 1
+    @State private var showSplash = true
+    @State private var splashOffsetY: CGFloat = -UIScreen.main.bounds.height
 
     var body: some View {
         ZStack {
@@ -17,14 +19,14 @@ struct TotalView: View {
                 // 본문 뷰 (탭 선택에 따라 변경)
                 ZStack {
                     switch selectedIndex {
-                    case 0: SplashView()
                     case 1: IntroduceView()
                     case 2: WriteView()
                     case 3: LibraryView()
-                    default: SplashView()
+                    default: EmptyView()
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+                
 
                 // 커스텀 탭바 (하단 고정)
                 ZStack(alignment: .topLeading) {
@@ -36,13 +38,14 @@ struct TotalView: View {
 
                     HStack(spacing: 40) {
                         Spacer()
-                        TabBarIcon(icon: "archivebox", index: 0, selectedIndex: $selectedIndex)
+                        TabBarIcon(icon: "archivebox", index: 0, selectedIndex: $selectedIndex, showSplash: $showSplash, splashOffsetY: $splashOffsetY)
                         Spacer()
-                        TabBarIcon(icon: "star.fill", index: 1, selectedIndex: $selectedIndex)
+                        TabBarIcon(icon: "star.fill", index: 1, selectedIndex: $selectedIndex, showSplash: $showSplash, splashOffsetY: $splashOffsetY)
                         Spacer()
-                        TabBarIcon(icon: "pencil", index: 2, selectedIndex: $selectedIndex)
+                        TabBarIcon(icon: "pencil", index: 2, selectedIndex: $selectedIndex, showSplash: $showSplash, splashOffsetY: $splashOffsetY)
                         Spacer()
-                        TabBarIcon(icon: "books.vertical", index: 3, selectedIndex: $selectedIndex)
+                        
+                        TabBarIcon(icon: "books.vertical", index: 3, selectedIndex: $selectedIndex, showSplash: $showSplash, splashOffsetY: $splashOffsetY)
                         Spacer()
                     }
                     .padding(.horizontal, 30)
@@ -50,8 +53,19 @@ struct TotalView: View {
                 }
             }
             .ignoresSafeArea(edges: .bottom)
+            if showSplash {
+                SplashView(offsetY: $splashOffsetY, showSplash: $showSplash)
+
+                    .onAppear {
+                        withAnimation {
+                            splashOffsetY = 0
+                        }
+                    }
+            }
+
         }
     }
+    
 }
 
 struct LeftTopRoundedShape: Shape {
@@ -77,10 +91,17 @@ struct TabBarIcon: View {
     let icon: String
     let index: Int
     @Binding var selectedIndex: Int
+    @Binding var showSplash: Bool
+    @Binding var splashOffsetY: CGFloat
 
     var body: some View {
         Button(action: {
-            selectedIndex = index
+            if index == 0 {
+                splashOffsetY = -UIScreen.main.bounds.height
+                showSplash = true
+            } else {
+                selectedIndex = index
+            }
         }) {
             Image(systemName: icon)
                 .font(.system(size: 36))

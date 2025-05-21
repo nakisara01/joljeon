@@ -13,14 +13,19 @@ struct IntroduceView: View {
             Image("IntroduceViewBackground")
                 .resizable()
                 .ignoresSafeArea()
-            
-
-            Text("Hello, World!")
         }
         VStack{
             Image("IntroduceLabel")
                 .padding(.top,80)
             Spacer()
+            ScrollView{
+                Text("hi")
+            }
+            .frame(height: 800)
+            .frame(width: 800)
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.gray, lineWidth: 1))
+
         }
     }
 }

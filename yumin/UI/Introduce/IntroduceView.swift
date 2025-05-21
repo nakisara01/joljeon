@@ -17,6 +17,11 @@ struct IntroduceView: View {
 
             Text("Hello, World!")
         }
+        VStack{
+            Image("IntroduceLabel")
+                .padding(.top,80)
+            Spacer()
+        }
     }
 }
 

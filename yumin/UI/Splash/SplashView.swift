@@ -10,7 +10,7 @@ import SwiftUI
 struct SplashView: View {
     var body: some View {
         ZStack {
-            Image("IntroduceBackground")
+            Image("SplashViewBackground")
                 .resizable()
                 .ignoresSafeArea()
             

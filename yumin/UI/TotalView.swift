@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TotalView: View {
-    @State private var selectedIndex: Int = 1
+    @State private var selectedIndex: Int = 2
 
     var body: some View {
         ZStack {

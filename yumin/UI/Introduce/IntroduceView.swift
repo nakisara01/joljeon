@@ -10,9 +10,12 @@ import SwiftUI
 struct IntroduceView: View {
     var body: some View {
         ZStack {
+            Image("IntroduceViewBackground")
+                .resizable()
+                .ignoresSafeArea()
+            
 
             Text("Hello, World!")
-                .foregroundColor(.white) // 배경 위에 글씨가 보이게
         }
     }
 }

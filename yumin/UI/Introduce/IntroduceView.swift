@@ -16,15 +16,28 @@ struct IntroduceView: View {
         }
         VStack{
             Image("IntroduceLabel")
-                .padding(.top,80)
-            Spacer()
+                .padding(.top,10)
+                .padding(.bottom, 30)
+            
             ScrollView{
                 Text("hi")
+                Text("hi")
+                Text("hi")
+                Text("hi")
+                Text("hi")
+                Text("hi")
+                Text("hi")
+                Text("hi")
+                Text("hi")
+                Text("hi")
+                Text("hi")
+                Text("hi")
+                //설명 UI가 들어갈 자리
             }
-            .frame(height: 800)
-            .frame(width: 800)
+            .frame(width:880, height: 920)
             .clipShape(RoundedRectangle(cornerRadius: 20))
-            .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.gray, lineWidth: 1))
+            .overlay(Rectangle().stroke(Color.gray, lineWidth: 1))
+            .padding(.bottom, 40)
 
         }
     }

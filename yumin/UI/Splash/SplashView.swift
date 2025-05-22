@@ -27,7 +27,7 @@ struct SplashView: View {
                             }
                         }
                         .onEnded { value in
-                            if value.translation.height < -100 {
+                            if value.translation.height < -500 {
                                 offsetY = -UIScreen.main.bounds.height
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                     showSplash = false

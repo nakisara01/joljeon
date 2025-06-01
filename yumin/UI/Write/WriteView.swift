@@ -10,6 +10,13 @@ import PencilKit
 
 struct WriteView: View {
     @State private var canvasView = CanvasUIView()
+    @EnvironmentObject var drawingModel: DrawingModel
+    
+    // Binding to the selectedDrawing in TotalView (now IdentifiableDrawing?)
+    @Binding var detailDrawingIndex: IdentifiableDrawing?
+    
+    // Binding to the selectedIndex in TotalView
+    @Binding var selectedIndex: Int
 
     var body: some View {
         ZStack{
@@ -39,12 +46,24 @@ struct WriteView: View {
                             .foregroundStyle(Color.white)
                     }
                     Button(action: {
-                        let image: () = canvasView.saveImageToPhotoLibrary()
+                        let image = canvasView.exportAsImageWithWhiteBackgroundAndBlackDrawing()
+                        canvasView.saveImageToPhotoLibrary()
+                        drawingModel.saveDrawing(image)
+                        
+                        // Get the index of the last saved drawing and create an IdentifiableDrawing object
+                        if let lastIndex = drawingModel.lastDrawingIndex() {
+                            // Ensure the image is available before creating IdentifiableDrawing
+                            if let lastDrawingImage = drawingModel.savedDrawings.last { // Get the image by index if needed
+                                detailDrawingIndex = IdentifiableDrawing(image: lastDrawingImage, index: lastIndex) // Set the binding with IdentifiableDrawing
+                            }
+                        }
+                        
+                        // Set selectedIndex to 3 to navigate to LibraryView
+                        selectedIndex = 3
                     }){
                         Image(systemName: "checkmark.circle")
                             .font(.system(size: 36))
                             .foregroundStyle(Color.white)
-
                     }
                 }
                 .padding(.vertical)

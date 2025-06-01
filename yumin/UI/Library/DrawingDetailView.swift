@@ -24,13 +24,13 @@ struct DrawingDetailView: View {
                             .font(.system(size: 36))
                             .foregroundColor(.white) // Adjust color as needed
                     }
-                    .padding(.leading, 200)
+                    .padding(.leading, 135)
                     Spacer()
                     
                     Text(String(format: "%03d", drawingIndex + 1))
                         .font(.system(size: 36, weight: .bold))
                         .foregroundColor(.white) // Adjust color as needed
-                        .padding(.trailing, 200)
+                        .padding(.trailing, 135)
                     
                 }
                 .padding(.horizontal)
@@ -43,7 +43,7 @@ struct DrawingDetailView: View {
                     Image(uiImage: drawingImage)
                         .resizable()
                         .scaledToFit()
-                        .frame(maxWidth: 800, maxHeight: 800) // Adjust max frame size
+                        .frame(maxWidth: 750, maxHeight: 750) // Adjust max frame size
                         .shadow(radius: 10) // Add shadow
                         .zIndex(1) // Ensure drawing is above the bar
                 }

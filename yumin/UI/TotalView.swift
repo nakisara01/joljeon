@@ -41,19 +41,19 @@ struct TotalView: View {
                                 .fixedSize(horizontal: false, vertical: true)
                                 .shadow(color: .black.opacity(0.1), radius: 6, x: 0, y: -2)
                             
-                            HStack(spacing: 40) {
+                            HStack(spacing: 0) {
                                 Spacer()
-                                TabBarIcon(icon: "archivebox", index: 0, selectedIndex: $selectedIndex, showSplash: $showSplash, splashOffsetY: $splashOffsetY)
+                                TabBarIcon(iconName: "Splash - 비활", activeIconName: "Splash - 활", index: 0, selectedIndex: $selectedIndex, showSplash: $showSplash, splashOffsetY: $splashOffsetY)
                                 Spacer()
-                                TabBarIcon(icon: "star.fill", index: 1, selectedIndex: $selectedIndex, showSplash: $showSplash, splashOffsetY: $splashOffsetY)
+                                TabBarIcon(iconName: "Introduce - 비활", activeIconName: "Introduce - 활", index: 1, selectedIndex: $selectedIndex, showSplash: $showSplash, splashOffsetY: $splashOffsetY)
                                 Spacer()
-                                TabBarIcon(icon: "pencil", index: 2, selectedIndex: $selectedIndex, showSplash: $showSplash, splashOffsetY: $splashOffsetY)
+                                TabBarIcon(iconName: "Write - 비활", activeIconName: "Write - 활", index: 2, selectedIndex: $selectedIndex, showSplash: $showSplash, splashOffsetY: $splashOffsetY)
                                 Spacer()
                                 
-                                TabBarIcon(icon: "books.vertical", index: 3, selectedIndex: $selectedIndex, showSplash: $showSplash, splashOffsetY: $splashOffsetY)
+                                TabBarIcon(iconName: "Library - 비활", activeIconName: "Library - 활", index: 3, selectedIndex: $selectedIndex, showSplash: $showSplash, splashOffsetY: $splashOffsetY)
                                 Spacer()
                             }
-                            .padding(.horizontal, 30)
+                            .padding(.horizontal, 200)
                             .padding(.top, 10)
                         }
                     }
@@ -102,7 +102,8 @@ struct LeftTopRoundedShape: Shape {
 }
 
 struct TabBarIcon: View {
-    let icon: String
+    let iconName: String
+    let activeIconName: String
     let index: Int
     @Binding var selectedIndex: Int
     @Binding var showSplash: Bool
@@ -118,9 +119,11 @@ struct TabBarIcon: View {
                 selectedIndex = index
             }
         }) {
-            Image(systemName: icon)
-                .font(.system(size: 36))
-                .foregroundColor(selectedIndex == index ? .green : .gray)
+            Image(selectedIndex == index ? activeIconName : iconName)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(height: 48)
+                .padding(.top, 14)
         }
     }
 }

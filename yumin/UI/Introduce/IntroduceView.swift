@@ -20,33 +20,17 @@ struct IntroduceView: View {
         }
         VStack{
             Image("IntroduceLabel")
-                .padding(.top,10)
-                .padding(.bottom, 30)
+                .padding(.top,5)
+                .padding(.bottom, 50)
                 // Add a long press gesture to the IntroduceLabel
                 .onLongPressGesture(minimumDuration: 3) { // 5 seconds minimum duration
                     // Action to perform after a long press
                     showingAdminSheet = true // Show the admin sheet
                 }
             
-            ScrollView{
-                Text("hi")
-                Text("hi")
-                Text("hi")
-                Text("hi")
-                Text("hi")
-                Text("hi")
-                Text("hi")
-                Text("hi")
-                Text("hi")
-                Text("hi")
-                Text("hi")
-                Text("hi")
-                //설명 UI가 들어갈 자리
-            }
-            .frame(width:880, height: 920)
-            .clipShape(RoundedRectangle(cornerRadius: 20))
-            .overlay(Rectangle().stroke(Color.gray, lineWidth: 1))
-            .padding(.bottom, 40)
+            Image("content")
+                .resizable()
+                .frame(width: 900, height: 912)
 
         }
         // Present the AdminView as a sheet when showingAdminSheet is true

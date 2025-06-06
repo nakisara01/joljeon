@@ -17,25 +17,33 @@ struct IntroduceView: View {
             Image("IntroduceViewBackground")
                 .resizable()
                 .ignoresSafeArea()
+                
         }
         VStack{
-            Image("IntroduceLabel")
-                .padding(.top,5)
-                .padding(.bottom, 50)
+            Image("rrrrpppp")
+                
+                .padding(.top,30)
+                .padding(.bottom, 40)
+                .ignoresSafeArea()
+                .shadow(color: .black.opacity(0.2), radius: 5, x: 4, y: 4)
+                .frame(maxWidth: .infinity, alignment: .top)
                 // Add a long press gesture to the IntroduceLabel
                 .onLongPressGesture(minimumDuration: 3) { // 5 seconds minimum duration
                     // Action to perform after a long press
                     showingAdminSheet = true // Show the admin sheet
                 }
             
-            Image("content")
-                .resizable()
-                .frame(width: 900, height: 912)
+            VStack(spacing: 0) {
+                Image("Prologue")
+                    .padding(.bottom, 50)
+                Image("IntroduceImage")
+                    .padding(.bottom, 80)
+            }
 
         }
         // Present the AdminView as a sheet when showingAdminSheet is true
         .sheet(isPresented: $showingAdminSheet, onDismiss: { // Correct argument label and position for onDismiss
-            // Reload drawings when the AdminView sheet is dismissed
+            // Reload drawing s when the AdminView sheet is dismissed
             drawingModel.loadDrawings()
         }) { // This is the content closure for the sheet
             AdminView()

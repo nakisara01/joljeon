@@ -26,11 +26,11 @@ struct LibraryView: View {
                                     .scaledToFit()
                                     .frame(maxWidth: .infinity)
                                     .padding(.horizontal)
-                                    .offset(y: 40)
+                                    .offset(y: 50)
                                     .zIndex(0)
                                     .shadow(color: .black.opacity(0.2), radius: 5, x: 4, y: 4)
                                 
-                                HStack(spacing: 95) {
+                                HStack(spacing: 90) {
                                     ForEach(index..<min(index + 4, drawingModel.savedDrawings.count), id: \.self) { drawingIndex in
                                         NavigationLink(destination: DrawingDetailView(drawingImage: drawingModel.savedDrawings[drawingIndex], drawingIndex: drawingIndex)) {
                                             VStack {
@@ -38,23 +38,23 @@ struct LibraryView: View {
                                                     Image("RealLibraryFrame")
                                                         .resizable()
                                                         .scaledToFit()
-                                                        .frame(width: 110, height: 110)
+                                                        .frame(width: 130, height: 130)
                                                         .shadow(color: .black.opacity(0.4), radius: 5, x: 8, y: 8)
 
                                                     Image(uiImage: drawingModel.savedDrawings[drawingIndex])
                                                         .resizable()
                                                         .scaledToFit()
                                                         .aspectRatio(1, contentMode: .fit)
-                                                        .frame(width: 100, height: 100)
+                                                        .frame(width: 118, height: 120)
                                                         .opacity(0.3)
 
                                                     Text(String(format: "%03d", drawingIndex + 1))
                                                         .fontWeight(.bold)
-                                                        .font(.system(size: 20))
+                                                        .font(.system(size: 25))
                                                         .foregroundColor(Color.brown.opacity(0.7))
                                                         .padding(.horizontal, 8)
 //                                                        .background(Color.white.opacity(0.4))
-                                                        .offset(x: 24, y: 37)
+                                                        .offset(x: 31, y: 43)
                                                         .zIndex(2)
                                                 }
                                             }
@@ -66,7 +66,7 @@ struct LibraryView: View {
                                     }
                                 }
                                 .padding(.horizontal)
-                                .padding(.leading, 124)
+                                .padding(.leading, 94)
                                 .zIndex(1)
                             }
                         }

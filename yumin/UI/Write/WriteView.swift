@@ -71,8 +71,8 @@ struct WriteView: View {
                 CanvasView(canvasView: $canvasView)
                     .frame(height: 800)
                     .frame(width: 800)
-                    .clipShape(RoundedRectangle(cornerRadius: 20))
-                    .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.gray, lineWidth: 1))
+                    .clipShape(Rectangle())
+                    .overlay(Rectangle().stroke(Color.white, lineWidth: 1))
                     .padding(.top, 40)
             }
             .onAppear {
